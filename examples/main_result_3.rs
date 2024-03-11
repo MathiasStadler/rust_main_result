@@ -3,6 +3,11 @@
 // check exit code on bash
 // https://www.cyberciti.biz/faq/linux-bash-exit-status-set-exit-statusin-bash/
 
+
+// RUST_BACKTRACE=full cargo run --example main_result_3
+// RUST_BACKTRACE=1 cargo run --example main_result_3
+
+
 // run on bash
 // cargo run --example main_result_3 && echo "success" || echo "failed"
 
