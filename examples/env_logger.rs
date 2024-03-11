@@ -5,6 +5,17 @@ Before running this example, try setting the `MY_LOG_LEVEL` environment variable
 
 ```no_run,shell
 $ export MY_LOG_LEVEL='info'
+
+$ MY_LOG_LEVEL=info cargo run --example env_logger
+$ MY_LOG_LEVEL=warn cargo run --example env_logger
+$ MY_LOG_LEVEL=error cargo run --example env_logger
+$ MY_LOG_LEVEL=wrong_level cargo run --example env_lo
+gger # NO OUTPUT
+MY_LOG_LEVEL=trace cargo run --example env_logger
+MY_LOG_STYLE=never MY_LOG_LEVEL=trace cargo run --example env_logger
+MY_LOG_STYLE=colors; MY_LOG_LEVEL=trace cargo run --example env_logger
+# 
+
 ```
 
 Also try setting the `MY_LOG_STYLE` environment variable to `never` to disable colors
