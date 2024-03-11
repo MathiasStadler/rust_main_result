@@ -27,5 +27,7 @@ pub fn run() -> Result<(), Box<dyn Error>> {
 fn main() {
     if let Err(e) = run() {
         println!("{}", e); // "There is an error: Oops"
+        ::std::process::exit(1);
     }
+    ::std::process::exit(0);
 }
