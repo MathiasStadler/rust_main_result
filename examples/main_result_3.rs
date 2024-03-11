@@ -3,18 +3,16 @@
 // check exit code on bash
 // https://www.cyberciti.biz/faq/linux-bash-exit-status-set-exit-statusin-bash/
 
-
-
 // run on bash
 // cargo run --example main_result_3 && echo "success" || echo "failed"
 
 // run on bash
-// cargo run --example main_result_3 && echo "Exit code => $?" 
+// cargo run --example main_result_3 && echo "Exit code => $?"
 
-
-use log::{debug, error, info, trace, warn};
 use env_logger::Env;
-use log::{LevelFilter};
+use log::LevelFilter;
+// use log::{debug, error, info, trace, warn};
+use log::{error, info};
 use std::io::Write;
 
 use std::error::Error;
@@ -42,7 +40,6 @@ pub fn run() -> Result<(), Box<dyn Error>> {
 }
 
 fn main() {
-
     let env = Env::default()
         .filter_or("MY_LOG_LEVEL", "trace")
         .write_style_or("MY_LOG_STYLE", "always");
@@ -50,29 +47,28 @@ fn main() {
     env_logger::init_from_env(env);
 
     env_logger::Builder::new()
-    .format(|buf, record| {
-        writeln!(
-            buf,
-            "{}:{} {} [{}] - {}",
-            record.file().unwrap_or("unknown"),
-            record.line().unwrap_or(0),
-            chrono::Local::now().format("%Y-%m-%dT%H:%M:%S"),
-            record.level(),
-            record.args()
-        )
-    })
-    .filter(Some("logger_example"), LevelFilter::Debug)
-    .init();
+        .format(|buf, record| {
+            writeln!(
+                buf,
+                "{}:{} {} [{}] - {}",
+                record.file().unwrap_or("unknown"),
+                record.line().unwrap_or(0),
+                chrono::Local::now().format("%Y-%m-%dT%H:%M:%S"),
+                record.level(),
+                record.args()
+            )
+        })
+        .filter(Some("logger_example"), LevelFilter::Debug)
+        .init();
 
-    
     info!("start main log");
 
     if let Err(e) = run() {
         // println!("{}", e); // "There is an error: Oops"
         error!("{}", e);
-        error!("Exit {}",1);
+        error!("Exit {}", 1);
         ::std::process::exit(1);
     }
-    info!("Exit {}",0);
+    info!("Exit {}", 0);
     ::std::process::exit(0);
 }
